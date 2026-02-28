@@ -3,198 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zapp Rápido - Automação WhatsApp</title>
-
+<title>Diagnóstico WhatsApp</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
+margin:0;
 font-family:'Poppins',sans-serif;
 background:#0f0f17;
 color:#fff;
-overflow-x:hidden;
-}
-
-header{
-background:linear-gradient(135deg,#13121A,#1f1d2b);
-padding:100px 20px;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 text-align:center;
 }
 
-header h1{
-font-size:48px;
-color:#FFA506;
-margin-bottom:20px;
-animation:fadeDown 1s ease;
+.container{
+max-width:600px;
+width:90%;
 }
 
-header p{
+h1{
+color:#FFA506;
+margin-bottom:30px;
+}
+
+.question{
 font-size:20px;
-max-width:700px;
-margin:auto;
-opacity:.9;
-animation:fadeUp 1.2s ease;
+margin-bottom:30px;
 }
 
 .button{
-display:inline-block;
-margin-top:40px;
-padding:18px 45px;
-background:#FFA506;
-color:#000;
-font-weight:700;
-text-decoration:none;
-border-radius:50px;
+display:block;
+margin:10px auto;
+padding:15px;
+background:#1b1a24;
+border:none;
+color:#fff;
+width:100%;
+border-radius:10px;
+cursor:pointer;
 transition:.3s;
-box-shadow:0 10px 30px rgba(255,165,6,.4);
+font-size:16px;
 }
 
 .button:hover{
-transform:scale(1.05);
-background:#ff8c00;
+background:#FFA506;
+color:#000;
 }
 
-.section{
-padding:90px 20px;
-max-width:1100px;
-margin:auto;
-text-align:center;
+.progress{
+height:8px;
+background:#222;
+border-radius:10px;
+margin-bottom:30px;
+overflow:hidden;
 }
 
-.section h2{
-font-size:36px;
-color:#FFA506;
-margin-bottom:50px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
-
-.card{
-background:#1b1a24;
-padding:35px;
-border-radius:20px;
+.progress-bar{
+height:8px;
+width:0%;
+background:#FFA506;
 transition:.4s;
-box-shadow:0 5px 20px rgba(0,0,0,.4);
 }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 15px 40px rgba(255,165,6,.2);
+.result{
+display:none;
 }
 
-.mockup{
-margin-top:60px;
-}
-
-.mockup img{
-width:100%;
-max-width:450px;
-animation:float 3s ease-in-out infinite;
-}
-
-.counter{
-font-size:60px;
-font-weight:800;
-color:#FFA506;
-}
-
-footer{
-text-align:center;
-padding:50px;
-opacity:.6;
-font-size:14px;
-}
-
-@keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-15px);}
-100%{transform:translateY(0px);}
-}
-
-@keyframes fadeDown{
-from{opacity:0;transform:translateY(-40px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(40px);}
-to{opacity:1;transform:translateY(0);}
+.cta{
+display:inline-block;
+margin-top:30px;
+padding:18px 40px;
+background:#FFA506;
+color:#000;
+font-weight:bold;
+border-radius:50px;
+text-decoration:none;
 }
 </style>
-
-<script>
-function startCounter(){
-let count=0;
-let target=312;
-let interval=setInterval(function(){
-if(count>=target){
-clearInterval(interval);
-}else{
-count++;
-document.getElementById("counter").innerText=count;
-}
-},15);
-}
-window.onload=startCounter;
-</script>
-
 </head>
+
 <body>
 
-<header>
-<h1>Automatize Seu WhatsApp e Pare de Perder Clientes</h1>
-<p>Empresários e clínicas estão aumentando agendamentos usando
-automação inteligente que responde 24 horas por dia.</p>
-<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="button">
-VER COMO FUNCIONA AGORA
+<div class="container">
+<h1>Diagnóstico de Automação</h1>
+
+<div class="progress">
+<div class="progress-bar" id="progress"></div>
+</div>
+
+<div id="quiz">
+<div class="question" id="question">Você utiliza WhatsApp para atender clientes?</div>
+<button class="button" onclick="next()">Sim</button>
+<button class="button" onclick="next()">Não</button>
+</div>
+
+<div class="result" id="result">
+<h2 style="color:#FFA506;">Seu perfil é ideal para automatização 🚀</h2>
+<p>Empresários com esse perfil aumentam agendamentos e reduzem perda de clientes.</p>
+<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta">
+VER APRESENTAÇÃO COMPLETA
 </a>
-</header>
-
-<section class="section">
-<h2>O Problema</h2>
-<div class="cards">
-<div class="card">Mensagens acumuladas</div>
-<div class="card">Clientes sem resposta</div>
-<div class="card">Agendamentos manuais</div>
-<div class="card">Perda de vendas fora do horário</div>
-</div>
-</section>
-
-<section class="section">
-<h2>A Solução</h2>
-<div class="cards">
-<div class="card">Respostas automáticas</div>
-<div class="card">Agendamento inteligente</div>
-<div class="card">Atendimento 24h</div>
-<div class="card">Organização total do WhatsApp</div>
 </div>
 
-<div class="mockup">
-<img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7" alt="Mockup celular">
 </div>
-</section>
 
-<section class="section">
-<h2>Empresas usando agora</h2>
-<div id="counter" class="counter">0</div>
-<p style="margin-top:20px;">negócios automatizados e crescendo</p>
-</section>
+<script>
+let step=0;
 
-<section class="section">
-<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="button">
-QUERO IMPLEMENTAR AGORA
-</a>
-</section>
+const questions=[
+"Você utiliza WhatsApp para atender clientes?",
+"Quantas mensagens você recebe por dia?",
+"Já perdeu clientes por demora no atendimento?",
+"Gostaria de automatizar seu atendimento?"
+];
 
-<footer>
-Página informativa. Ao clicar você será redirecionado para a apresentação oficial.
-</footer>
+function next(){
+step++;
+if(step<questions.length){
+document.getElementById("question").innerText=questions[step];
+document.getElementById("progress").style.width=(step/questions.length)*100+"%";
+}else{
+document.getElementById("quiz").style.display="none";
+document.getElementById("progress").style.width="100%";
+document.getElementById("result").style.display="block";
+}
+}
+</script>
 
 </body>
 </html>

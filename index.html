@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico WhatsApp</title>
+<title>Análise Estratégica de Atendimento</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:#0f0f17;
+background:linear-gradient(135deg,#0f0f17,#171622);
 color:#fff;
 display:flex;
 justify-content:center;
@@ -20,29 +20,35 @@ text-align:center;
 }
 
 .container{
-max-width:600px;
+max-width:650px;
 width:90%;
 }
 
 h1{
 color:#FFA506;
+margin-bottom:10px;
+}
+
+.sub{
+opacity:.8;
 margin-bottom:30px;
 }
 
 .question{
-font-size:20px;
+font-size:22px;
 margin-bottom:30px;
+font-weight:600;
 }
 
 .button{
 display:block;
-margin:10px auto;
-padding:15px;
+margin:12px auto;
+padding:16px;
 background:#1b1a24;
-border:none;
+border:1px solid #2a2935;
 color:#fff;
 width:100%;
-border-radius:10px;
+border-radius:12px;
 cursor:pointer;
 transition:.3s;
 font-size:16px;
@@ -51,10 +57,11 @@ font-size:16px;
 .button:hover{
 background:#FFA506;
 color:#000;
+transform:scale(1.03);
 }
 
 .progress{
-height:8px;
+height:6px;
 background:#222;
 border-radius:10px;
 margin-bottom:30px;
@@ -62,7 +69,7 @@ overflow:hidden;
 }
 
 .progress-bar{
-height:8px;
+height:6px;
 width:0%;
 background:#FFA506;
 transition:.4s;
@@ -70,6 +77,7 @@ transition:.4s;
 
 .result{
 display:none;
+animation:fadeIn .8s ease;
 }
 
 .cta{
@@ -81,6 +89,12 @@ color:#000;
 font-weight:bold;
 border-radius:50px;
 text-decoration:none;
+box-shadow:0 10px 30px rgba(255,165,6,.4);
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -88,21 +102,31 @@ text-decoration:none;
 <body>
 
 <div class="container">
-<h1>Diagnóstico de Automação</h1>
+<h1>Análise Estratégica de Atendimento</h1>
+<p class="sub">Responda 4 perguntas e descubra se sua empresa está pronta para automatizar o WhatsApp.</p>
 
 <div class="progress">
 <div class="progress-bar" id="progress"></div>
 </div>
 
 <div id="quiz">
-<div class="question" id="question">Você utiliza WhatsApp para atender clientes?</div>
-<button class="button" onclick="next()">Sim</button>
-<button class="button" onclick="next()">Não</button>
+<div class="question" id="question">
+Hoje, como funciona o atendimento no seu WhatsApp?
+</div>
+
+<button class="button" onclick="next()">Totalmente manual (eu ou equipe responde)</button>
+<button class="button" onclick="next()">Parcialmente organizado, mas sem automação</button>
+<button class="button" onclick="next()">Uso respostas prontas, mas ainda é manual</button>
 </div>
 
 <div class="result" id="result">
-<h2 style="color:#FFA506;">Seu perfil é ideal para automatização 🚀</h2>
-<p>Empresários com esse perfil aumentam agendamentos e reduzem perda de clientes.</p>
+<h2 style="color:#FFA506;">Diagnóstico Concluído 🚀</h2>
+<p>Identificamos que sua empresa possui forte potencial para aumentar agendamentos e reduzir perda de clientes com automação inteligente.</p>
+
+<p style="margin-top:20px;opacity:.8;">
+Empresas com perfil semelhante estão implementando sistemas que atendem 24h por dia e aumentam conversões.
+</p>
+
 <a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta">
 VER APRESENTAÇÃO COMPLETA
 </a>
@@ -114,10 +138,10 @@ VER APRESENTAÇÃO COMPLETA
 let step=0;
 
 const questions=[
-"Você utiliza WhatsApp para atender clientes?",
-"Quantas mensagens você recebe por dia?",
-"Já perdeu clientes por demora no atendimento?",
-"Gostaria de automatizar seu atendimento?"
+"Quantas conversas em média sua empresa recebe por dia?",
+"Você já perdeu clientes por demora no retorno?",
+"Seu atendimento funciona fora do horário comercial?",
+"Você gostaria de reduzir tempo operacional e aumentar agendamentos?"
 ];
 
 function next(){

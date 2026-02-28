@@ -3,60 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Automação de WhatsApp para Empresários</title>
+<title>Zapp Rápido - Automação WhatsApp</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #0f0f14;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #13121A;
     color: #ffffff;
-    line-height: 1.6;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1100px;
     margin: auto;
     padding: 40px 20px;
 }
 
-h1 {
-    font-size: 32px;
+.hero {
     text-align: center;
-    color: #ffa500;
+    padding: 80px 20px;
 }
 
-h2 {
-    color: #ffa500;
-    margin-top: 40px;
+.hero h1 {
+    font-size: 42px;
+    color: #FFA506;
+    margin-bottom: 20px;
 }
 
-p {
-    margin: 15px 0;
-}
-
-ul {
-    margin: 20px 0;
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 10px;
+.hero p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: auto;
+    opacity: 0.9;
 }
 
 .button {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 18px;
-    text-align: center;
-    background-color: #ffa500;
-    color: #000000;
+    display: inline-block;
+    margin-top: 40px;
+    padding: 18px 40px;
+    background-color: #FFA506;
+    color: #000;
     font-weight: bold;
-    font-size: 18px;
     text-decoration: none;
     border-radius: 50px;
+    font-size: 18px;
     transition: 0.3s;
 }
 
@@ -64,83 +54,102 @@ li {
     background-color: #ff8c00;
 }
 
-.highlight {
-    color: #ffa500;
-    font-weight: bold;
+.section {
+    padding: 80px 20px;
+    text-align: center;
 }
 
-.section {
-    margin-top: 50px;
+.section h2 {
+    color: #FFA506;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    background: #1C1B25;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.counter {
+    font-size: 48px;
+    color: #FFA506;
+    font-weight: bold;
 }
 
 .footer {
     text-align: center;
+    padding: 40px;
     font-size: 14px;
-    margin-top: 60px;
     opacity: 0.6;
 }
 </style>
-</head>
 
+<script>
+function startCounter() {
+    let count = 0;
+    let target = 247;
+    let interval = setInterval(function() {
+        if (count >= target) {
+            clearInterval(interval);
+        } else {
+            count++;
+            document.getElementById("counter").innerText = count;
+        }
+    }, 20);
+}
+
+window.onload = startCounter;
+</script>
+
+</head>
 <body>
 
-<div class="container">
-
-<h1>Empresários e Clínicas Estão Perdendo Clientes Todos os Dias no WhatsApp</h1>
-
-<p>Se você é dono de empresa, clínica ou consultório e depende do WhatsApp para atender clientes, isso pode estar custando vendas todos os dias.</p>
-
-<p>A maioria das empresas demora para responder. E quando isso acontece, o cliente fecha com o concorrente.</p>
-
-<div class="section">
-<h2>O Problema</h2>
-
-<ul>
-<li>Mensagens acumuladas</li>
-<li>Secretária sobrecarregada</li>
-<li>Pacientes perguntando preço o tempo todo</li>
-<li>Agendamentos feitos manualmente</li>
-<li>Perda de vendas fora do horário comercial</li>
-</ul>
+<div class="hero">
+    <h1>Automatize Seu WhatsApp e Pare de Perder Clientes</h1>
+    <p>Empresários e clínicas estão utilizando um sistema que responde automaticamente,
+    agenda consultas e funciona 24 horas por dia.</p>
+    <a href="SEU_LINK_KIWIFY_AQUI" class="button">QUERO VER COMO FUNCIONA</a>
 </div>
 
 <div class="section">
-<h2>A Solução Que Está Crescendo no Brasil</h2>
-
-<p>Algumas empresas estão utilizando um sistema que:</p>
-
-<ul>
-<li><span class="highlight">Responde automaticamente</span></li>
-<li><span class="highlight">Agenda consultas sozinho</span></li>
-<li><span class="highlight">Funciona 24 horas por dia</span></li>
-<li><span class="highlight">Atende vários clientes ao mesmo tempo</span></li>
-<li><span class="highlight">Organiza o atendimento</span></li>
-</ul>
-
-<p>Tudo isso sem precisar contratar mais funcionários.</p>
+    <h2>O Problema</h2>
+    <div class="cards">
+        <div class="card">Mensagens acumuladas</div>
+        <div class="card">Perda de clientes por demora</div>
+        <div class="card">Atendimento manual</div>
+        <div class="card">Sem atendimento fora do horário</div>
+    </div>
 </div>
 
 <div class="section">
-<h2>O Resultado</h2>
-
-<p>Empresas que implementaram esse sistema relatam:</p>
-
-<ul>
-<li>Mais agendamentos</li>
-<li>Atendimento mais rápido</li>
-<li>Melhor organização</li>
-<li>Aumento nas conversões</li>
-</ul>
+    <h2>A Solução</h2>
+    <div class="cards">
+        <div class="card">Responde automaticamente</div>
+        <div class="card">Agenda sozinho</div>
+        <div class="card">Atende 24h por dia</div>
+        <div class="card">Organiza seu atendimento</div>
+    </div>
 </div>
 
-<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="button">
-VER COMO FUNCIONA AGORA
-</a>
+<div class="section">
+    <h2>Empresas utilizando agora:</h2>
+    <div id="counter" class="counter">0</div>
+</div>
+
+<div class="section">
+    <a href="SEU_LINK_KIWIFY_AQUI" class="button">COMEÇAR AGORA</a>
+</div>
 
 <div class="footer">
-<p>Esta página é apenas informativa. Ao clicar no botão acima você será direcionado para a apresentação completa do sistema.</p>
-</div>
-
+    Página informativa. Ao clicar você será redirecionado para a apresentação completa.
 </div>
 
 </body>

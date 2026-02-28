@@ -38,6 +38,7 @@ margin-bottom:30px;
 font-size:22px;
 margin-bottom:30px;
 font-weight:600;
+min-height:60px;
 }
 
 .button{
@@ -103,28 +104,22 @@ to{opacity:1;transform:translateY(0);}
 
 <div class="container">
 <h1>Análise Estratégica de Atendimento</h1>
-<p class="sub">Responda 4 perguntas e descubra se sua empresa está pronta para automatizar o WhatsApp.</p>
+<p class="sub">Responda 4 perguntas rápidas e descubra seu nível de automação.</p>
 
 <div class="progress">
 <div class="progress-bar" id="progress"></div>
 </div>
 
 <div id="quiz">
-<div class="question" id="question">
-Hoje, como funciona o atendimento no seu WhatsApp?
-</div>
-
-<button class="button" onclick="next()">Totalmente manual (eu ou equipe responde)</button>
-<button class="button" onclick="next()">Parcialmente organizado, mas sem automação</button>
-<button class="button" onclick="next()">Uso respostas prontas, mas ainda é manual</button>
+<div class="question" id="question"></div>
+<div id="answers"></div>
 </div>
 
 <div class="result" id="result">
 <h2 style="color:#FFA506;">Diagnóstico Concluído 🚀</h2>
-<p>Identificamos que sua empresa possui forte potencial para aumentar agendamentos e reduzir perda de clientes com automação inteligente.</p>
-
+<p>Identificamos que sua empresa possui alto potencial de crescimento com automação inteligente.</p>
 <p style="margin-top:20px;opacity:.8;">
-Empresas com perfil semelhante estão implementando sistemas que atendem 24h por dia e aumentam conversões.
+Empresas com perfil semelhante aumentam agendamentos e reduzem perda de clientes rapidamente.
 </p>
 
 <a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta">
@@ -135,26 +130,65 @@ VER APRESENTAÇÃO COMPLETA
 </div>
 
 <script>
-let step=0;
+let step = 0;
 
-const questions=[
-"Quantas conversas em média sua empresa recebe por dia?",
-"Você já perdeu clientes por demora no retorno?",
-"Seu atendimento funciona fora do horário comercial?",
-"Você gostaria de reduzir tempo operacional e aumentar agendamentos?"
+const quizData = [
+{
+question: "Hoje, como funciona o atendimento no seu WhatsApp?",
+answers: [
+"Totalmente manual (eu ou equipe responde)",
+"Parcialmente organizado, mas sem automação",
+"Uso respostas prontas, mas ainda é manual"
+]
+},
+{
+question: "Quantas conversas sua empresa recebe em média por dia?",
+answers: [
+"Até 10 conversas",
+"Entre 10 e 30 conversas",
+"Mais de 30 conversas por dia"
+]
+},
+{
+question: "Você já perdeu clientes por demora no retorno?",
+answers: [
+"Sim, frequentemente",
+"Já aconteceu algumas vezes",
+"Não tenho controle sobre isso"
+]
+},
+{
+question: "Seu atendimento funciona fora do horário comercial?",
+answers: [
+"Não funciona",
+"Funciona parcialmente",
+"Gostaria que funcionasse 24h"
+]
+}
 ];
 
-function next(){
+function loadQuestion(){
+document.getElementById("question").innerText = quizData[step].question;
+let answersHTML = "";
+quizData[step].answers.forEach(answer => {
+answersHTML += `<button class="button" onclick="nextStep()">${answer}</button>`;
+});
+document.getElementById("answers").innerHTML = answersHTML;
+document.getElementById("progress").style.width = (step/quizData.length)*100 + "%";
+}
+
+function nextStep(){
 step++;
-if(step<questions.length){
-document.getElementById("question").innerText=questions[step];
-document.getElementById("progress").style.width=(step/questions.length)*100+"%";
+if(step < quizData.length){
+loadQuestion();
 }else{
 document.getElementById("quiz").style.display="none";
 document.getElementById("progress").style.width="100%";
 document.getElementById("result").style.display="block";
 }
 }
+
+loadQuestion();
 </script>
 
 </body>

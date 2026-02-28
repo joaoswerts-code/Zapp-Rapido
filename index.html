@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Estratégica de Atendimento</title>
+
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -18,10 +23,8 @@ fbq('track', 'PageView');
 <img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=693260629343683&ev=PageView&noscript=1"/>
 </noscript>
-<!-- End Meta Pixel Code --><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Análise Estratégica de Atendimento</title>
+<!-- End Meta Pixel Code -->
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -36,81 +39,26 @@ align-items:center;
 height:100vh;
 text-align:center;
 }
-
-.container{
-max-width:650px;
-width:90%;
-}
-
-h1{
-color:#FFA506;
-margin-bottom:10px;
-}
-
-.sub{
-opacity:.8;
-margin-bottom:30px;
-}
-
-.question{
-font-size:22px;
-margin-bottom:30px;
-font-weight:600;
-min-height:60px;
-}
-
+.container{max-width:650px;width:90%;}
+h1{color:#FFA506;margin-bottom:10px;}
+.sub{opacity:.8;margin-bottom:30px;}
+.question{font-size:22px;margin-bottom:30px;font-weight:600;min-height:60px;}
 .button{
-display:block;
-margin:12px auto;
-padding:16px;
-background:#1b1a24;
-border:1px solid #2a2935;
-color:#fff;
-width:100%;
-border-radius:12px;
-cursor:pointer;
-transition:.3s;
-font-size:16px;
+display:block;margin:12px auto;padding:16px;
+background:#1b1a24;border:1px solid #2a2935;
+color:#fff;width:100%;border-radius:12px;
+cursor:pointer;transition:.3s;font-size:16px;
 }
-
-.button:hover{
-background:#FFA506;
-color:#000;
-transform:scale(1.03);
-}
-
-.progress{
-height:6px;
-background:#222;
-border-radius:10px;
-margin-bottom:30px;
-overflow:hidden;
-}
-
-.progress-bar{
-height:6px;
-width:0%;
-background:#FFA506;
-transition:.4s;
-}
-
-.result{
-display:none;
-animation:fadeIn .8s ease;
-}
-
+.button:hover{background:#FFA506;color:#000;transform:scale(1.03);}
+.progress{height:6px;background:#222;border-radius:10px;margin-bottom:30px;overflow:hidden;}
+.progress-bar{height:6px;width:0%;background:#FFA506;transition:.4s;}
+.result{display:none;animation:fadeIn .8s ease;}
 .cta{
-display:inline-block;
-margin-top:30px;
-padding:18px 40px;
-background:#FFA506;
-color:#000;
-font-weight:bold;
-border-radius:50px;
-text-decoration:none;
+display:inline-block;margin-top:30px;padding:18px 40px;
+background:#FFA506;color:#000;font-weight:bold;
+border-radius:50px;text-decoration:none;
 box-shadow:0 10px 30px rgba(255,165,6,.4);
 }
-
 @keyframes fadeIn{
 from{opacity:0;transform:translateY(30px);}
 to{opacity:1;transform:translateY(0);}
@@ -136,15 +84,13 @@ to{opacity:1;transform:translateY(0);}
 <div class="result" id="result">
 <h2 style="color:#FFA506;">Diagnóstico Concluído 🚀</h2>
 <p>Identificamos que sua empresa possui alto potencial de crescimento com automação inteligente.</p>
-<p style="margin-top:20px;opacity:.8;">
-Empresas com perfil semelhante aumentam agendamentos e reduzem perda de clientes rapidamente.
-</p>
 
-<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta">
+<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY"
+class="cta"
+onclick="fbq('track','ViewContent');">
 VER APRESENTAÇÃO COMPLETA
 </a>
 </div>
-
 </div>
 
 <script>
@@ -203,6 +149,8 @@ loadQuestion();
 document.getElementById("quiz").style.display="none";
 document.getElementById("progress").style.width="100%";
 document.getElementById("result").style.display="block";
+
+fbq('track','Lead');
 }
 }
 

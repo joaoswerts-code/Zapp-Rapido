@@ -66,41 +66,42 @@ padding:15px;
 overflow-y:auto;
 display:flex;
 flex-direction:column;
-gap:10px;
+gap:14px;
+scroll-behavior:smooth;
 }
 
 .bot{
 background:#1b1a24;
 color:#fff;
-padding:12px 15px;
-border-radius:14px 14px 14px 0;
-max-width:80%;
-animation:fadeIn .3s ease;
+padding:14px 16px;
+border-radius:16px 16px 16px 0;
+max-width:85%;
+font-size:15px;
 }
 
 .user{
 background:#FFA506;
 color:#000;
-padding:12px 15px;
-border-radius:14px 14px 0 14px;
+padding:14px 16px;
+border-radius:16px 16px 0 16px;
 align-self:flex-end;
-max-width:80%;
 font-weight:500;
-animation:fadeIn .3s ease;
+font-size:15px;
+max-width:85%;
 }
 
 .typing{
 background:#1b1a24;
-padding:10px 15px;
-border-radius:14px 14px 14px 0;
-width:60px;
+padding:12px 16px;
+border-radius:16px 16px 16px 0;
+width:70px;
 display:flex;
-gap:4px;
+gap:5px;
 }
 
 .dot{
-width:6px;
-height:6px;
+width:7px;
+height:7px;
 background:#999;
 border-radius:50%;
 animation:blink 1.4s infinite both;
@@ -116,20 +117,23 @@ animation:blink 1.4s infinite both;
 }
 
 .options{
-padding:10px;
+padding:15px;
+max-height:200px;
+overflow-y:auto;
 }
 
 .option-btn{
 display:block;
 width:100%;
-margin:6px 0;
-padding:12px;
-border-radius:10px;
+margin:8px 0;
+padding:14px;
+border-radius:12px;
 border:1px solid #2a2935;
 background:#1b1a24;
 color:#fff;
 cursor:pointer;
 transition:.3s;
+font-size:15px;
 }
 
 .option-btn:hover{
@@ -139,30 +143,31 @@ color:#000;
 
 .input-area{
 display:flex;
-padding:10px;
-gap:5px;
+padding:15px;
+gap:8px;
 }
 
 input{
 flex:1;
-padding:10px;
-border-radius:20px;
+padding:14px;
+border-radius:25px;
 border:none;
 outline:none;
+font-size:15px;
 }
 
 .send-btn{
 background:#FFA506;
 border:none;
-padding:10px 15px;
-border-radius:20px;
+padding:14px 18px;
+border-radius:25px;
 cursor:pointer;
 font-weight:bold;
 }
 
 audio{
 width:100%;
-margin-top:5px;
+margin-top:8px;
 }
 
 .final-screen{
@@ -189,12 +194,12 @@ margin-bottom:15px;
 
 .final-screen p{
 color:#fff;
-max-width:300px;
+max-width:320px;
 line-height:1.6;
+margin-bottom:25px;
 }
 
 .cta{
-margin-top:30px;
 padding:18px 40px;
 background:#FFA506;
 color:#000;
@@ -202,11 +207,6 @@ font-weight:bold;
 border-radius:50px;
 text-decoration:none;
 box-shadow:0 10px 30px rgba(255,165,6,.4);
-transition:.3s;
-}
-
-.cta:hover{
-transform:scale(1.05);
 }
 </style>
 </head>
@@ -273,17 +273,21 @@ answers:[
 const chat = document.getElementById("chat");
 const options = document.getElementById("options");
 
+function scrollToBottom(){
+chat.scrollTop = chat.scrollHeight;
+}
+
 function typingEffect(callback){
 const typing = document.createElement("div");
 typing.className="typing";
 typing.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
 chat.appendChild(typing);
-chat.scrollTop = chat.scrollHeight;
+scrollToBottom();
 
 setTimeout(()=>{
 chat.removeChild(typing);
 callback();
-},1500);
+},1200);
 }
 
 function botMessage(text){
@@ -291,7 +295,7 @@ const msg = document.createElement("div");
 msg.className="bot";
 msg.innerText=text;
 chat.appendChild(msg);
-chat.scrollTop = chat.scrollHeight;
+scrollToBottom();
 }
 
 function botAudio(){
@@ -301,13 +305,12 @@ msg.className="bot";
 msg.innerHTML = `
 🎧 Mensagem de áudio
 <audio controls>
-<source src="Áudio do WhatsApp de 2024-05-14 à(s) 17.06.35_c7b74fc7.waptt.opus" type="audio/mpeg">
-Seu navegador não suporta áudio.
+<source src="Áudio do WhatsApp de 2024-05-14 à(s) 17.06.35_c7b74fc7.waptt.opus" type="audio/ogg">
 </audio>
 `;
 
 chat.appendChild(msg);
-chat.scrollTop = chat.scrollHeight;
+scrollToBottom();
 }
 
 function userMessage(text){
@@ -315,7 +318,7 @@ const msg = document.createElement("div");
 msg.className="user";
 msg.innerText=text;
 chat.appendChild(msg);
-chat.scrollTop = chat.scrollHeight;
+scrollToBottom();
 }
 
 function sendName(){
@@ -333,7 +336,7 @@ typingEffect(()=>{
 botAudio();
 setTimeout(()=>{
 startQuiz();
-},1500);
+},1800);
 });
 },800);
 });
@@ -355,6 +358,7 @@ btn.innerText=a.text;
 btn.onclick=()=>selectAnswer(a);
 options.appendChild(btn);
 });
+scrollToBottom();
 }
 
 function selectAnswer(answer){
@@ -372,7 +376,7 @@ showOptions();
 }else{
 finishQuiz();
 }
-},600);
+},500);
 }
 
 function finishQuiz(){
@@ -381,7 +385,7 @@ botMessage("Analisando suas respostas...");
 setTimeout(()=>{
 document.getElementById("finalScreen").style.display="flex";
 fbq('track','CompleteRegistration');
-},1800);
+},1500);
 });
 }
 

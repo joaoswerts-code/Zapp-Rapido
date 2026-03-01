@@ -33,9 +33,15 @@ align-items:center;
 height:100vh;
 }
 
-.chat-container{
+.wrapper{
 width:390px;
 height:680px;
+position:relative;
+}
+
+.chat-container{
+width:100%;
+height:100%;
 background:#0f0f17;
 border-radius:25px;
 display:flex;
@@ -133,14 +139,16 @@ color:#000;
 
 .final-screen{
 display:none;
-position:absolute;
-width:390px;
-height:680px;
+width:100%;
+height:100%;
 background:linear-gradient(135deg,#0f0f17,#171622);
 border-radius:25px;
+position:absolute;
+top:0;
+left:0;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 text-align:center;
 padding:30px;
 box-sizing:border-box;
@@ -148,10 +156,17 @@ box-sizing:border-box;
 
 .final-screen h2{
 color:#FFA506;
+margin-bottom:15px;
+}
+
+.final-screen p{
+color:#fff;
+max-width:300px;
+line-height:1.6;
 }
 
 .cta{
-margin-top:25px;
+margin-top:30px;
 padding:18px 40px;
 background:#FFA506;
 color:#000;
@@ -175,7 +190,8 @@ to{opacity:1;transform:translateY(0);}
 
 <body>
 
-<div style="position:relative;">
+<div class="wrapper">
+
 <div class="chat-container" id="chatBox">
 
 <div class="header">
@@ -190,7 +206,9 @@ Assistente Automático
 
 <div class="final-screen" id="finalScreen">
 <h2>Diagnóstico Concluído 🚀</h2>
-<p id="resultText"></p>
+<p>
+Identificamos que sua empresa possui alto potencial de crescimento com automação inteligente.
+</p>
 
 <a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" 
 class="cta"
@@ -198,6 +216,7 @@ onclick="fbq('track','ViewContent');">
 VER APRESENTAÇÃO COMPLETA
 </a>
 </div>
+
 </div>
 
 <script>
@@ -294,25 +313,10 @@ finishQuiz();
 }
 
 function finishQuiz(){
-
 typingEffect(()=>{
-
-let result="";
-
-if(score >=7){
-result="Seu negócio depende fortemente de atendimento manual. A automação pode gerar crescimento imediato.";
-}
-else if(score >=4){
-result="Você já possui estrutura, mas ainda perde oportunidades por falta de automação estratégica.";
-}
-else{
-result="Seu negócio já tem base organizada, mas pode escalar muito mais com automação inteligente.";
-}
-
-botMessage(result);
+botMessage("Analisando suas respostas...");
 
 setTimeout(()=>{
-document.getElementById("chatBox").style.display="none";
 document.getElementById("finalScreen").style.display="flex";
 fbq('track','CompleteRegistration');
 },1800);

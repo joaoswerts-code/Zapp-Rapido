@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prévia do Atendimento Automatizado</title>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '693260629343683');
+fbq('track', 'PageView');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f0f17,#171622);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.wrapper{
+width:390px;
+height:680px;
+position:relative;
+}
+
+.chat-container{
+width:100%;
+height:100%;
+background:#0f0f17;
+border-radius:25px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+box-shadow:0 30px 80px rgba(0,0,0,.6);
+border:1px solid #2a2935;
+}
+
+.header{
+background:#171622;
+padding:15px;
+color:#FFA506;
+font-weight:600;
+text-align:center;
+border-bottom:1px solid #2a2935;
+}
+
+.chat{
+flex:1;
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.bot{
+background:#1b1a24;
+color:#fff;
+padding:12px 15px;
+border-radius:14px 14px 14px 0;
+max-width:80%;
+animation:fadeIn .3s ease;
+}
+
+.user{
+background:#FFA506;
+color:#000;
+padding:12px 15px;
+border-radius:14px 14px 0 14px;
+align-self:flex-end;
+max-width:80%;
+font-weight:500;
+animation:fadeIn .3s ease;
+}
+
+.typing{
+background:#1b1a24;
+padding:10px 15px;
+border-radius:14px 14px 14px 0;
+width:60px;
+display:flex;
+gap:4px;
+}
+
+.dot{
+width:6px;
+height:6px;
+background:#999;
+border-radius:50%;
+animation:blink 1.4s infinite both;
+}
+
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+
+@keyframes blink{
+0%{opacity:.2}
+20%{opacity:1}
+100%{opacity:.2}
+}
+
+.options{
+padding:10px;
+}
+
+.option-btn{
+display:block;
+width:100%;
+margin:6px 0;
+padding:12px;
+border-radius:10px;
+border:1px solid #2a2935;
+background:#1b1a24;
+color:#fff;
+cursor:pointer;
+transition:.3s;
+}
+
+.option-btn:hover{
+background:#FFA506;
+color:#000;
+}
+
+.input-area{
+display:flex;
+padding:10px;
+gap:5px;
+}
+
+input{
+flex:1;
+padding:10px;
+border-radius:20px;
+border:none;
+outline:none;
+}
+
+.send-btn{
+background:#FFA506;
+border:none;
+padding:10px 15px;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+audio{
+width:100%;
+margin-top:5px;
+}
+
+.final-screen{
+display:none;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#0f0f17,#171622);
+border-radius:25px;
+position:absolute;
+top:0;
+left:0;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+box-sizing:border-box;
+}
+
+.final-screen h2{
+color:#FFA506;
+margin-bottom:15px;
+}
+
+.final-screen p{
+color:#fff;
+max-width:300px;
+line-height:1.6;
+}
+
+.cta{
+margin-top:30px;
+padding:18px 40px;
+background:#FFA506;
+color:#000;
+font-weight:bold;
+border-radius:50px;
+text-decoration:none;
+box-shadow:0 10px 30px rgba(255,165,6,.4);
+transition:.3s;
+}
+
+.cta:hover{
+transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="chat-container" id="chatBox">
+<div class="header">Assistente Automático</div>
+<div class="chat" id="chat"></div>
+<div class="options" id="options"></div>
+<div class="input-area" id="inputArea">
+<input type="text" id="nameInput" placeholder="Digite seu nome...">
+<button class="send-btn" onclick="sendName()">Enviar</button>
+</div>
+</div>
+
+<div class="final-screen" id="finalScreen">
+<h2>Diagnóstico Concluído 🚀</h2>
+<p>Identificamos que sua empresa possui alto potencial de crescimento com automação inteligente.</p>
+<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" 
+class="cta"
+onclick="fbq('track','ViewContent');">
+VER APRESENTAÇÃO COMPLETA
+</a>
+</div>
+
+</div>
+
+<script>
+
+let step = 0;
+let score = 0;
+let userName = "";
+
+const quiz = [
+{
+question:"Como funciona seu atendimento hoje?",
+answers:[
+{text:"Totalmente manual", value:3},
+{text:"Semi organizado", value:2},
+{text:"Automatizado parcialmente", value:1}
+]
+},
+{
+question:"Você já perdeu clientes por demora?",
+answers:[
+{text:"Sim, frequentemente", value:3},
+{text:"Às vezes", value:2},
+{text:"Não sei", value:1}
+]
+},
+{
+question:"Seu WhatsApp vende 24h?",
+answers:[
+{text:"Não", value:3},
+{text:"Parcialmente", value:2},
+{text:"Sim", value:1}
+]
+}
+];
+
+const chat = document.getElementById("chat");
+const options = document.getElementById("options");
+
+function typingEffect(callback){
+const typing = document.createElement("div");
+typing.className="typing";
+typing.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+chat.appendChild(typing);
+chat.scrollTop = chat.scrollHeight;
+
+setTimeout(()=>{
+chat.removeChild(typing);
+callback();
+},1500);
+}
+
+function botMessage(text){
+const msg = document.createElement("div");
+msg.className="bot";
+msg.innerText=text;
+chat.appendChild(msg);
+chat.scrollTop = chat.scrollHeight;
+}
+
+function botAudio(){
+const msg = document.createElement("div");
+msg.className="bot";
+
+msg.innerHTML = `
+🎧 Mensagem de áudio
+<audio controls>
+<source src="audio.mp3" type="audio/mpeg">
+Seu navegador não suporta áudio.
+</audio>
+`;
+
+chat.appendChild(msg);
+chat.scrollTop = chat.scrollHeight;
+}
+
+function userMessage(text){
+const msg = document.createElement("div");
+msg.className="user";
+msg.innerText=text;
+chat.appendChild(msg);
+chat.scrollTop = chat.scrollHeight;
+}
+
+function sendName(){
+const input = document.getElementById("nameInput");
+if(input.value.trim() === "") return;
+
+userName = input.value.trim();
+userMessage(userName);
+document.getElementById("inputArea").style.display="none";
+
+typingEffect(()=>{
+botMessage(`Olá ${userName}, eu sou o Chatbot do Zapp Rápido.`);
+setTimeout(()=>{
+typingEffect(()=>{
+botAudio();
+setTimeout(()=>{
+startQuiz();
+},1500);
+});
+},800);
+});
+}
+
+function startQuiz(){
+typingEffect(()=>{
+botMessage(quiz[step].question);
+showOptions();
+});
+}
+
+function showOptions(){
+options.innerHTML="";
+quiz[step].answers.forEach(a=>{
+const btn=document.createElement("button");
+btn.className="option-btn";
+btn.innerText=a.text;
+btn.onclick=()=>selectAnswer(a);
+options.appendChild(btn);
+});
+}
+
+function selectAnswer(answer){
+score += answer.value;
+userMessage(answer.text);
+options.innerHTML="";
+step++;
+
+setTimeout(()=>{
+if(step < quiz.length){
+typingEffect(()=>{
+botMessage(quiz[step].question);
+showOptions();
+});
+}else{
+finishQuiz();
+}
+},600);
+}
+
+function finishQuiz(){
+typingEffect(()=>{
+botMessage("Analisando suas respostas...");
+setTimeout(()=>{
+document.getElementById("finalScreen").style.display="flex";
+fbq('track','CompleteRegistration');
+},1800);
+});
+}
+
+typingEffect(()=>{
+botMessage("Olá 👋 Antes de começarmos, qual é o seu nome?");
+});
+
+</script>
+
+</body>
+</html>

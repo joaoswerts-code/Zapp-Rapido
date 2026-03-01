@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico Estratégico de Atendimento</title>
+<title>Prévia do Chatbot - Zap Rápido</title>
 
 <!-- Meta Pixel -->
 <script>
@@ -20,120 +20,120 @@ fbq('init', '693260629343683');
 fbq('track', 'PageView');
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#0f0f17,#171622);
-color:#fff;
+background:#0f0f17;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-text-align:center;
 }
 
-.container{
-max-width:700px;
-width:90%;
-}
-
-h1{
-color:#FFA506;
-}
-
-.question{
-font-size:22px;
-margin:30px 0;
-font-weight:600;
-min-height:60px;
-}
-
-.button{
-display:block;
-margin:12px auto;
-padding:16px;
-background:#1b1a24;
-border:1px solid #2a2935;
-color:#fff;
-width:100%;
-border-radius:12px;
-cursor:pointer;
-transition:.3s;
-font-size:16px;
-}
-
-.button:hover{
-background:#FFA506;
-color:#000;
-transform:scale(1.03);
-}
-
-.progress{
-height:6px;
-background:#222;
-border-radius:10px;
-margin:20px 0;
+.chat-container{
+width:380px;
+height:650px;
+background:#111b21;
+border-radius:25px;
+display:flex;
+flex-direction:column;
 overflow:hidden;
+box-shadow:0 20px 60px rgba(0,0,0,.6);
 }
 
-.progress-bar{
-height:6px;
-width:0%;
-background:#FFA506;
-transition:.4s;
+.header{
+background:#202c33;
+padding:15px;
+color:#fff;
+font-weight:600;
 }
 
-.result{
-display:none;
-animation:fadeIn .8s ease;
+.chat{
+flex:1;
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.bot{
+background:#202c33;
+color:#fff;
+padding:10px 14px;
+border-radius:12px 12px 12px 0;
+max-width:80%;
+animation:fadeIn .3s ease;
+}
+
+.user{
+background:#005c4b;
+color:#fff;
+padding:10px 14px;
+border-radius:12px 12px 0 12px;
+align-self:flex-end;
+max-width:80%;
+animation:fadeIn .3s ease;
+}
+
+.options{
+padding:10px;
+background:#111b21;
+}
+
+.option-btn{
+display:block;
+width:100%;
+margin:6px 0;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#25d366;
+color:#000;
+font-weight:600;
+cursor:pointer;
+}
+
+.option-btn:hover{
+opacity:.8;
 }
 
 .cta{
-display:inline-block;
-margin-top:30px;
-padding:18px 40px;
-background:#FFA506;
+display:none;
+margin:15px;
+padding:15px;
+background:#25d366;
 color:#000;
-font-weight:bold;
-border-radius:50px;
+text-align:center;
+border-radius:12px;
 text-decoration:none;
-box-shadow:0 10px 30px rgba(255,165,6,.4);
+font-weight:bold;
 }
 
 @keyframes fadeIn{
-from{opacity:0;transform:translateY(30px);}
+from{opacity:0;transform:translateY(5px);}
 to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="chat-container">
 
-<h1>Diagnóstico Estratégico</h1>
-
-<div class="progress">
-<div class="progress-bar" id="progress"></div>
+<div class="header">
+Zap Rápido • Assistente
 </div>
 
-<div id="quiz">
-<div class="question" id="question"></div>
-<div id="answers"></div>
-</div>
+<div class="chat" id="chat"></div>
 
-<div class="result" id="result">
-<h2 style="color:#FFA506;">Diagnóstico Concluído 🚀</h2>
-<p id="diagnosticText"></p>
+<div class="options" id="options"></div>
 
-<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta">
-VER APRESENTAÇÃO COMPLETA
+<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta" id="cta">
+Ver Apresentação Completa
 </a>
-
-</div>
 
 </div>
 
@@ -142,82 +142,107 @@ VER APRESENTAÇÃO COMPLETA
 let step = 0;
 let score = 0;
 
-const quizData = [
+const quiz = [
 {
-question: "Como funciona seu atendimento hoje?",
-answers: [
-{ text:"Totalmente manual", value:3 },
-{ text:"Semi organizado", value:2 },
-{ text:"Automatizado parcialmente", value:1 }
+question:"Como funciona seu atendimento hoje?",
+answers:[
+{text:"Totalmente manual", value:3},
+{text:"Semi organizado", value:2},
+{text:"Automatizado parcialmente", value:1}
 ]
 },
 {
-question: "Você já perdeu clientes por demora?",
-answers: [
-{ text:"Sim, frequentemente", value:3 },
-{ text:"Às vezes", value:2 },
-{ text:"Não sei", value:1 }
+question:"Você já perdeu clientes por demora?",
+answers:[
+{text:"Sim, frequentemente", value:3},
+{text:"Às vezes", value:2},
+{text:"Não sei", value:1}
 ]
 },
 {
-question: "Seu WhatsApp vende 24h?",
-answers: [
-{ text:"Não", value:3 },
-{ text:"Parcialmente", value:2 },
-{ text:"Sim", value:1 }
+question:"Seu WhatsApp vende 24h?",
+answers:[
+{text:"Não", value:3},
+{text:"Parcialmente", value:2},
+{text:"Sim", value:1}
 ]
 }
 ];
 
-function loadQuestion(){
-document.getElementById("question").innerText = quizData[step].question;
+const chat = document.getElementById("chat");
+const options = document.getElementById("options");
 
-let answersHTML = "";
-quizData[step].answers.forEach(answer => {
-answersHTML += `<button class="button" onclick="nextStep(${answer.value})">${answer.text}</button>`;
-});
-
-document.getElementById("answers").innerHTML = answersHTML;
-document.getElementById("progress").style.width = (step/quizData.length)*100 + "%";
+function botMessage(text){
+const msg = document.createElement("div");
+msg.className="bot";
+msg.innerText=text;
+chat.appendChild(msg);
+chat.scrollTop = chat.scrollHeight;
 }
 
-function nextStep(value){
-score += value;
+function userMessage(text){
+const msg = document.createElement("div");
+msg.className="user";
+msg.innerText=text;
+chat.appendChild(msg);
+chat.scrollTop = chat.scrollHeight;
+}
+
+function showOptions(){
+options.innerHTML="";
+quiz[step].answers.forEach(a=>{
+const btn=document.createElement("button");
+btn.className="option-btn";
+btn.innerText=a.text;
+btn.onclick=()=>selectAnswer(a);
+options.appendChild(btn);
+});
+}
+
+function selectAnswer(answer){
+score += answer.value;
+userMessage(answer.text);
+options.innerHTML="";
 step++;
 
-if(step < quizData.length){
-loadQuestion();
+setTimeout(()=>{
+if(step < quiz.length){
+botMessage(quiz[step].question);
+showOptions();
 }else{
 finishQuiz();
 }
+},600);
 }
 
 function finishQuiz(){
 
-document.getElementById("quiz").style.display="none";
-document.getElementById("progress").style.width="100%";
-document.getElementById("result").style.display="block";
+let result="";
 
-let diagnostic = "";
-
-if(score >= 7){
-diagnostic = "Seu atendimento está altamente dependente de processos manuais. A automação pode gerar crescimento imediato.";
+if(score >=7){
+result="Identificamos grande dependência de processos manuais. A automação pode gerar crescimento imediato 🚀";
 }
 else if(score >=4){
-diagnostic = "Você já tem estrutura, mas ainda perde oportunidades por falta de automação estratégica.";
+result="Seu negócio já tem estrutura, mas ainda perde oportunidades por falta de automação estratégica.";
 }
 else{
-diagnostic = "Seu negócio já possui base organizada, mas pode escalar muito mais com automação inteligente.";
+result="Você já possui uma base organizada, mas pode escalar muito mais com automação inteligente.";
 }
 
-document.getElementById("diagnosticText").innerText = diagnostic;
+botMessage(result);
 
-// Evento Meta Pixel
-fbq('track', 'CompleteRegistration');
+document.getElementById("cta").style.display="block";
+
+// Evento Meta
+fbq('track','CompleteRegistration');
 
 }
 
-loadQuestion();
+botMessage("Olá 👋 Sou o assistente do Zap Rápido.");
+setTimeout(()=>{
+botMessage(quiz[step].question);
+showOptions();
+},800);
 
 </script>
 

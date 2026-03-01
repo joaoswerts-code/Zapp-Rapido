@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Estratégico de Atendimento</title>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '693260629343683');
+fbq('track', 'PageView');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f0f17,#171622);
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+}
+
+.container{
+max-width:700px;
+width:90%;
+}
+
+h1{
+color:#FFA506;
+}
+
+.question{
+font-size:22px;
+margin:30px 0;
+font-weight:600;
+min-height:60px;
+}
+
+.button{
+display:block;
+margin:12px auto;
+padding:16px;
+background:#1b1a24;
+border:1px solid #2a2935;
+color:#fff;
+width:100%;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+font-size:16px;
+}
+
+.button:hover{
+background:#FFA506;
+color:#000;
+transform:scale(1.03);
+}
+
+.progress{
+height:6px;
+background:#222;
+border-radius:10px;
+margin:20px 0;
+overflow:hidden;
+}
+
+.progress-bar{
+height:6px;
+width:0%;
+background:#FFA506;
+transition:.4s;
+}
+
+.result{
+display:none;
+animation:fadeIn .8s ease;
+}
+
+.cta{
+display:inline-block;
+margin-top:30px;
+padding:18px 40px;
+background:#FFA506;
+color:#000;
+font-weight:bold;
+border-radius:50px;
+text-decoration:none;
+box-shadow:0 10px 30px rgba(255,165,6,.4);
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Diagnóstico Estratégico</h1>
+
+<div class="progress">
+<div class="progress-bar" id="progress"></div>
+</div>
+
+<div id="quiz">
+<div class="question" id="question"></div>
+<div id="answers"></div>
+</div>
+
+<div class="result" id="result">
+<h2 style="color:#FFA506;">Diagnóstico Concluído 🚀</h2>
+<p id="diagnosticText"></p>
+
+<a href="https://kiwify.app/FPD2Og4?afid=RQ6f1efY" class="cta">
+VER APRESENTAÇÃO COMPLETA
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+let step = 0;
+let score = 0;
+
+const quizData = [
+{
+question: "Como funciona seu atendimento hoje?",
+answers: [
+{ text:"Totalmente manual", value:3 },
+{ text:"Semi organizado", value:2 },
+{ text:"Automatizado parcialmente", value:1 }
+]
+},
+{
+question: "Você já perdeu clientes por demora?",
+answers: [
+{ text:"Sim, frequentemente", value:3 },
+{ text:"Às vezes", value:2 },
+{ text:"Não sei", value:1 }
+]
+},
+{
+question: "Seu WhatsApp vende 24h?",
+answers: [
+{ text:"Não", value:3 },
+{ text:"Parcialmente", value:2 },
+{ text:"Sim", value:1 }
+]
+}
+];
+
+function loadQuestion(){
+document.getElementById("question").innerText = quizData[step].question;
+
+let answersHTML = "";
+quizData[step].answers.forEach(answer => {
+answersHTML += `<button class="button" onclick="nextStep(${answer.value})">${answer.text}</button>`;
+});
+
+document.getElementById("answers").innerHTML = answersHTML;
+document.getElementById("progress").style.width = (step/quizData.length)*100 + "%";
+}
+
+function nextStep(value){
+score += value;
+step++;
+
+if(step < quizData.length){
+loadQuestion();
+}else{
+finishQuiz();
+}
+}
+
+function finishQuiz(){
+
+document.getElementById("quiz").style.display="none";
+document.getElementById("progress").style.width="100%";
+document.getElementById("result").style.display="block";
+
+let diagnostic = "";
+
+if(score >= 7){
+diagnostic = "Seu atendimento está altamente dependente de processos manuais. A automação pode gerar crescimento imediato.";
+}
+else if(score >=4){
+diagnostic = "Você já tem estrutura, mas ainda perde oportunidades por falta de automação estratégica.";
+}
+else{
+diagnostic = "Seu negócio já possui base organizada, mas pode escalar muito mais com automação inteligente.";
+}
+
+document.getElementById("diagnosticText").innerText = diagnostic;
+
+// Evento Meta Pixel
+fbq('track', 'CompleteRegistration');
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
